@@ -1,13 +1,20 @@
-@extends('admin.admin_layouts')
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    @include('admin.partials.meta')
 
-@section('admin_content')
+    <title>Admin Login</title>
+
+    @include('admin.partials.styles')
+  </head>
+
+  <body>
     <div class="d-flex align-items-center justify-content-center bg-sl-primary ht-100v">
 
       <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white">
-        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse"><span class="tx-info tx-normal">Admin Panel</span></div>
+        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse"><span class="tx-info tx-normal">Admin Login</span></div>
         <div class="tx-center mg-b-60">Professional laravel Ecommerce</div>
-
-
         <form action="{{ route('admin.login') }}" method="post">
             @csrf
         <div class="form-group">
@@ -33,4 +40,7 @@
         </form>
       </div><!-- login-wrapper -->
     </div><!-- d-flex -->
-@endsection
+    @include('admin.partials.scripts')
+    
+    </body>
+  </html>

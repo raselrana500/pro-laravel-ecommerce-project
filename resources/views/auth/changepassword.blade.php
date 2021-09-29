@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('frontend.layouts.app')
 
 @section('content')
 <div class="container">
@@ -53,12 +53,30 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Reset Password') }}
                                 </button>
+                                <a href="{{ route('user.profile') }}" class="btn btn-primary">Back</a>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <div class="col-4">
+                <div class="card p-4">
+                    <img src="{{ asset('frontend/images/adv_2.png') }}" alt="image"
+                    class="card-img-top" style="width:90px;margin-left:34%;">
+                    <div class="card">
+                        <h4 class="card-title text-center">{{ Auth::user()->name }}</h4>
+                    </div>
+                    <ul class="list-group list-goup-flush">
+                        <li class="list-group-item"><a href="{{ route('password.change') }}">Change Password</a></li>
+                        <li class="list-group-item">two</li>
+                        <li class="list-group-item">three</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="{{ route('user.logout') }}" class="btn btn-danger btn-sm btn-block">Logout</a>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 @endsection

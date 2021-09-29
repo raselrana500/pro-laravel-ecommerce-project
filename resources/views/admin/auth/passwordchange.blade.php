@@ -1,6 +1,15 @@
-@extends('admin.admin_layouts')
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    @include('admin.partials.meta')
 
-@section('admin_content')
+    <title>Admin Login</title>
+
+    @include('admin.partials.styles')
+  </head>
+
+  <body>
 <div class="container mt-4"><br><br><br>
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,4 +71,7 @@
         </div>
     </div>
 </div>
-@endsection
+@include('admin.partials.scripts')
+    
+    </body>
+  </html>

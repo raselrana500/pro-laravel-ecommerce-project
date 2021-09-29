@@ -1,7 +1,16 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    @include('admin.partials.meta')
 
-@section('content')
-<div class="container">
+    <title>Admin Login</title>
+
+    @include('admin.partials.styles')
+  </head>
+
+  <body>
+<div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -44,4 +53,7 @@
         </div>
     </div>
 </div>
-@endsection
+@include('admin.partials.scripts')
+    
+    </body>
+  </html>

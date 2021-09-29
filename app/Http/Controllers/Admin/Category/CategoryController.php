@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Category;
 
-use App\Category;
+use App\Model\Admin\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -14,9 +16,55 @@ class CategoryController extends Controller
     
     public function index()
     {
-        //
+        $category = Category::orderBy('id','desc')->get();
+        return view('admin.category.category',compact('category'));
     }
 
+
+    public function storeCategory(Request $request){
+        $validateData = $request->validate([
+            'category_name' => 'required|unique:categories|max:55'
+        ]);
+
+        $data = array();
+        $data['category_name'] = $request->category_name;
+        DB::table('categories')->insert($data);
+        $notification=array(
+            'messege'=>'Category Added Successfully!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
+    }
+
+    public function updateCategory(Request $request,$id){
+        $validateData = $request->validate([
+            'category_name' => 'required|unique:categories|max:55'
+        ]);
+        
+        $data =Category::find($id);
+        $data->category_name = $request->category_name;
+        $data->save();
+        if ($data->save()) {
+            $notification=array(
+                'messege'=>'Category Updated Successfully!',
+                'alert-type'=>'success'
+                );
+            return Redirect()->back()->with($notification);
+            }
+    }
+
+    public function deleteCat($id){
+        DB::table('categories')->where('id',$id)->delete();
+        $notification=array(
+            'messege'=>'Category Deleted !!',
+            'alert-type'=>'error'
+             );
+           return Redirect()->back()->with($notification);
+    }
+    // public function editCat($id){
+    //     $data = Category::find($id);
+    //     return view('admin.category.category',compact('data'));
+    // }
     /**
      * Show the form for creating a new resource.
      *

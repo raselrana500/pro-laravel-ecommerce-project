@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
+use Illuminate\Support\Facades\Hash;
 class HomeController extends Controller
 {
     /**
@@ -23,7 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('frontend.home');
+    }
+    public function showUserProfile()
+    {
+        return view('frontend.home');
     }
 
     public function changePassword(){
@@ -72,7 +78,7 @@ class HomeController extends Controller
                 'messege'=>'Successfully Logout',
                 'alert-type'=>'success'
                  );
-             return Redirect()->route('login')->with($notification);
+             return Redirect()->route('home.page')->with($notification);
        
 
     }
