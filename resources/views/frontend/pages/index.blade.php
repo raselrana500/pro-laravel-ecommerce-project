@@ -180,12 +180,9 @@ $hotDeal = DB::table('products')
 												<div><a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}">{{ $row->product_name }}</a></div>
 											</div>
 											<div class="product_extras">
-												<div class="product_color">
-													<input type="radio" checked name="product_color" style="background:#b19c83">
-													<input type="radio" name="product_color" style="background:#000000">
-													<input type="radio" name="product_color" style="background:#999999">
-												</div>
-												<button class="product_cart_button addToCart" data-id="{{ $row->id }}">Add to Cart</button>
+
+												<button id="{{ $row->id }}"data-toggle="modal" data-target="#cartmodal" onclick="productview(this.id)"class="product_cart_button" data-id="{{ $row->id }}">Add to Cart</button>
+											
 											</div>
 										</div>
 										<button class="addwishlist" data-id="{{ $row->id }}">
@@ -3527,8 +3524,29 @@ $product = DB::table('products')->where('category_id',$catId)->where('status',1)
 	</div>
 </div>
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="cartmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
 		$('.addToCart').on('click', function() {
 			var id = $(this).data('id');
@@ -3568,7 +3586,7 @@ $product = DB::table('products')->where('category_id',$catId)->where('status',1)
 			}
 		});
 	});
-</script>
+</script> -->
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.addwishlist').on('click', function() {
@@ -3610,6 +3628,5 @@ $product = DB::table('products')->where('category_id',$catId)->where('status',1)
 		});
 	});
 </script>
-
 
 @endsection

@@ -98,6 +98,13 @@ Route::post('store/newslater', 'FrontController@storeNewslater')->name('store.ne
 Route::get('add/wishlist/{id}','WishlistController@addWishlist');
 //add to card route
 Route::get('add/to/cart/{id}','CartController@addToCart');
+//show cart page
+Route::get('product/cart','CartController@showCartPage')->name('show.cart');
+//remove cart item
+Route::get('remove/cart/{id}','CartController@deleteCartItem');
+//update cart qty cart item
+Route::post('remove/cart/qty','CartController@updateCartQty')->name('update.cartqty');
+//check cart product
 Route::get('check','CartController@check');
 Route::get('product/details/{id}/{product_name}','ProductDetailsController@singleProductView');
 Route::post('cart/product/add/{id}','ProductDetailsController@addToCart');

@@ -45,7 +45,7 @@
 										<div class="form-group">
 
 										<label for="exampleFormControlSelect1">Color</label>
-										<select name="color" id="exampleFormControlSelect1" class="form-control input-lg">
+										<select name="color" id="exampleFormControlSelect1" class="form-control">
 											@foreach($product_color as $color)	
 												<option value="{{ $color }}">{{ $color }}</option>
 											@endforeach
