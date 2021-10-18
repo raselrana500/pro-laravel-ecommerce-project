@@ -30,7 +30,7 @@
                 <tr>
                   <th class="wd-15p">Id</th>
                   <th class="wd-15p">Coupon Code</th>
-                  <th class="wd-15p">Discount (%)<</th>
+                  <th class="wd-15p">Discount (%)</th>
                   <th class="wd-20p">Action</th>
                 </tr>
               </thead>

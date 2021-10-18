@@ -1,42 +1,59 @@
 @extends('frontend.layouts.app')
 @section('content')
+
+@php
+    $order = DB::table('orders')->where('user_id',Auth::id())->orderBy('id','DESC')->limit(10)->get();
+@endphp
 <div class="contact_form">
     <div class="container">
         <div class="row">
-            <div class="col-8 card">
+            <div class="col-md-8 card">
                 <table class="table tbl-responsive">
                     <thead>
                         <tr>
-                            <th class="col">#</th>
-                            <th class="col">First</th>
-                            <th class="col">Last</th>
-                            <th class="col">Body</th>
+                            <th>Payment Type</th>
+                            <th>Status Code</th>
+                            <th>Amount</th>
+                            <th>Data</th>
+                            <th>Status Code</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="col">One</td>
-                            <td class="col">two</td>
-                            <td class="col">three</td>
-                            <td class="col">four</td>
-                        </tr>
-                        <tr>
-                            <td class="col">One</td>
-                            <td class="col">two</td>
-                            <td class="col">three</td>
-                            <td class="col">four</td>
-                        </tr>
-                        <tr>
-                            <td class="col">One</td>
-                            <td class="col">two</td>
-                            <td class="col">three</td>
-                            <td class="col">four</td>
-                        </tr>
+                        @foreach ($order as $row)
+                            <tr>
+                                <td>{{ $row->payment_type }}</td>
+                                <td>{{ $row->status_code}}</td>
+                                <td>{{ $row->total }} $ </td>
+                                <td>{{ $row->date}}</td>
+                                <td>{{ $row->status_code }}</td>
+                                <td>
+                                    @if ($row->status == 0)
+                                    <span class="badge badge-warning">Pending</span>
+                                    @elseif($row->status == 1)
+                                        <span class="badge badge-info">Payment Accept</span>
+                                    @elseif($row->status == 2)
+                                        <span class="badge badge-primary">Process</span>
+                                    @elseif($row->status == 3)
+                                        <span class="badge badge-success">Deliverd</span>
+                                    @else
+                                        <span class="badge badge-danger">Cancel</span>
+                                    @endif
+                                  </td>
+                                <td>
+                                    <a href="{{ URL::to('user/profile/order/view/'.$row->id)  }}" class="btn btn-sm btn-info">View</a>
+                                </td>
+
+                            </tr>
+                            
+                        @endforeach
+                        
                     </tbody>
                 </table>
 
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <div class="card p-4">
                     <img src="{{ asset('frontend/images/adv_2.png') }}" alt="image"
                     class="card-img-top" style="width:90px;margin-left:34%;">

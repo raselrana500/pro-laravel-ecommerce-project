@@ -59,4 +59,23 @@ class ProductDetailsController extends Controller
                return Redirect()->back()->with($notification);
         }
     }
+
+    public function productsView($id){
+        $products = DB::table('products')->where('subcategory_id',$id)->paginate(10);
+        $singleProduct = DB::table('products')->where('subcategory_id',$id)->first();
+        $category = DB::table('categories')->get();      
+        $brands = DB::table('products')->where('subcategory_id',$id)
+                        ->select('brand_id')->groupBy('brand_id')->get();
+
+        return view('frontend.pages.allsubcat_products',compact('products','category','brands','singleProduct'));
+    }
+
+    public function categoryProductView($id){
+        $categoryProduct = DB::table('products')->where('category_id',$id)->paginate(10);
+        $Product = DB::table('products')->where('category_id',$id)->first();
+        $category = DB::table('categories')->get();        
+
+        return view('frontend.pages.allcat_products',compact('categoryProduct','category','Product'));
+    }
+    
 }

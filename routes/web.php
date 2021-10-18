@@ -94,12 +94,22 @@ Route::post('update/blog/post/{id}', 'Admin\Post\PostController@updateBlogPost')
 //all frontend routes
 Route::post('store/newslater', 'FrontController@storeNewslater')->name('store.newslatter');
 // Route::post('update/coupon/{id}', 'Admin\Coupon\CouponController@updateCoupon')->name('update.coupon');
+
 //wishlist route
 Route::get('add/wishlist/{id}','WishlistController@addWishlist');
+Route::get('user/wishlist','WishlistController@showWishlistItem')->name('user.wishlist');
+
 //add to card route
 Route::get('add/to/cart/{id}','CartController@addToCart');
 //show cart page
 Route::get('product/cart','CartController@showCartPage')->name('show.cart');
+
+//show Qucik view
+Route::get('/cart/product/view/{id}','CartController@viewProduct');
+
+//show Qucik view
+Route::post('/cart/product/insert','CartController@insertIntoCart')->name('insert.into.cart');
+
 //remove cart item
 Route::get('remove/cart/{id}','CartController@deleteCartItem');
 //update cart qty cart item
@@ -108,3 +118,60 @@ Route::post('remove/cart/qty','CartController@updateCartQty')->name('update.cart
 Route::get('check','CartController@check');
 Route::get('product/details/{id}/{product_name}','ProductDetailsController@singleProductView');
 Route::post('cart/product/add/{id}','ProductDetailsController@addToCart');
+
+//checkout
+
+Route::get('user/checkout','CartController@checkout')->name('user.checkout');
+//apply coupon
+
+Route::post('user/apply/coupon','CartController@applyCoupon')->name('apply.coupon');
+Route::get('user/remove/coupon','CartController@removeCoupon')->name('coupon.remove');
+
+//blog routes
+Route::get('blog/post','BlogController@blog')->name('blog.post');
+Route::get('blog/post/english','BlogController@english')->name('language.english');
+Route::get('blog/post/bangla','BlogController@bangla')->name('language.bangla');
+Route::get('blog/postdetails/{id}','BlogController@viewSinglePost');
+
+//payment routes
+Route::get('payment/page','PaymentController@paymentPage')->name('payment.step');
+Route::post('payment/process','PaymentController@paymentProcess')->name('payment.process');
+Route::post('payment/stripe','PaymentController@stripeCharge')->name('stripe.charge');
+//product details route
+Route::get('subcategory/{id}','ProductDetailsController@productsView');
+Route::get('category/{id}','ProductDetailsController@categoryProductView');
+
+//order route for admin pannel
+Route::get('admin/order/new','Admin\Order\OrderController@newOrder')->name('admin.neworder');
+Route::get('admin/order/view/{id}','Admin\Order\OrderController@viewOrder');
+Route::get('admin/payment/accept/{id}','Admin\Order\OrderController@paymentAccept');
+Route::get('admin/payment/cancel/{id}','Admin\Order\OrderController@cancelOrder');
+Route::get('admin/accept/payment','Admin\Order\OrderController@acceptPayment')->name('admin.payment.accept');
+Route::get('admin/cancel/order','Admin\Order\OrderController@cancelOrderView')->name('admin.cancel.order');
+Route::get('admin/process/delivery','Admin\Order\OrderController@processDeliveryOrderView')->name('admin.process.delivery');
+Route::get('admin/order/delivery/success','Admin\Order\OrderController@deliveredOrderView')->name('admin.delivery.order');
+
+Route::get('admin/delivery/process/{id}','Admin\Order\OrderController@OrderDeliveryProcess');
+Route::get('admin/delivery/done/{id}','Admin\Order\OrderController@OrderDeliveryDone');
+Route::get('admin/all/order','Admin\Order\OrderController@allOrderItemShow')->name('admin.all.order');
+
+
+//user order view route from frontend
+Route::get('user/profile/order/view/{id}','OrderDetailController@viewOrder');
+
+//seo routes
+Route::get('admin/seo','Admin\Seo\SeoController@seo')->name('admin.seo');
+Route::post('admin/seo/info/update','Admin\Seo\SeoController@updateSeoInfo')->name('admn.seo.info.update');
+
+//order tracking route
+Route::post('admin/order/track','FrontController@orderTracking')->name('order.tracking');
+
+//Reports controller
+Route::get('admin/today/order','Admin\Report\ReportController@todayOrder')->name('today.order');
+Route::get('admin/today/delivery','Admin\Report\ReportController@todayDelivery')->name('today.delivery');
+Route::get('admin/report/this/month','Admin\Report\ReportController@thisMonthReport')->name('this.month');
+Route::get('admin/report/search','Admin\Report\ReportController@searchReport')->name('search.report');
+//report search
+Route::post('admin/report/search/by/year','Admin\Report\ReportController@searchByYear')->name('search.by.year');
+Route::post('admin/report/search/by/month','Admin\Report\ReportController@searchByMonth')->name('search.by.month');
+Route::post('admin/report/search/by/date','Admin\Report\ReportController@searchByDate')->name('search.by.date');

@@ -28,4 +28,19 @@ class FrontController extends Controller
     {
         return view('frontend.pages.index');
     }
+
+    public function orderTracking(Request $request)
+    {
+        $code = $request->status_code;
+        $track = DB::table('orders')->where('status_code',$code)->first();
+        if ($track) {
+            return view('frontend.pages.order_tracking',compact('track'));
+        }else{
+            $notification=array(
+                'messege'=>'Invalid Status code !!',
+                'alert-type'=>'error'
+                 );
+               return Redirect()->back()->with($notification);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 @section('content')
 @include('frontend.layouts.menubar')
+@include('frontend.layouts.slider')
 
 @php
 $featured = DB::table('products')->where('status',1)->orderBy('id','desc')->limit(15)->get();
@@ -167,7 +168,11 @@ $hotDeal = DB::table('products')
 								<div class="featured_slider_item">
 									<div class="border_active"></div>
 									<div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-										<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="{{ URL::to($row->image_one) }}" style="width:100px;" alt=""></div>
+										<div class="product_image d-flex flex-column align-items-center justify-content-center">
+											<a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}">
+												<img src="{{ URL::to($row->image_one) }}" style="width:100px;" alt="">
+											</a>
+										</div>
 										<div class="product_content">
 											@if($row->discount_price == NULL)
 											<div class="product_price discount">${{ $row->selling_price }}</div>
@@ -3531,20 +3536,98 @@ $product = DB::table('products')->where('category_id',$catId)->where('status',1)
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">Product Quick View</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
+
       <div class="modal-body">
-        ...
+        <div class="row">
+
+			<div class="col-md-4">
+				<div class="card">
+					<img src="" alt="" id="pimage">
+					<div class="card-body">
+						<h5 class="card-title" id="pname"> 
+							card title
+						</h5>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<ul class="list-group">
+					<li class="list-group-item">Product Code: <span id="pcode"></span></li>
+					<li class="list-group-item">Category: <span id="pcat"></span></li>
+					<li class="list-group-item">Sub Category: <span id="psub"></span></li>
+					<li class="list-group-item">Brand: <span id="pbrand"></span></li>
+					<li class="list-group-item">Stock: <span class="badge" style="background:green;color:white;">Available</span></li>
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<form action="{{ route('insert.into.cart') }}" method="post">
+					@csrf
+					<input type="hidden" name="product_id" id="product_id">
+				<div class="form-group">
+					<lable for="exampleInputColor">Color</lable>
+					
+					<select class="form-control" name="color" id="color">
+							
+					</select>
+				</div>
+
+				<div class="form-group">
+					<lable for="exampleInputColor" >Size</lable>
+					
+					<select class="form-control" name="size" id="size">
+							
+					</select>
+				</div>
+
+				<div class="form-group">
+					<lable for="exampleInputColor">Quantity</lable>
+					<input type="number" class="form-control" name="qty" value="1">
+					
+				</div>
+				
+				<button class="btn btn-primary" type="submit">Add to cart</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</form>
+			</div>
+			
+		</div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+	  
     </div>
   </div>
 </div>
 
+<script type="text/javascript"> 
+	function productview(id){
+		$.ajax({
+			url: "{{ url('/cart/product/view/') }}/"+id,
+			type: "GET",
+			dataType:"json",
+			success:function(data){
+				$('#pname').text(data.product.product_name);
+				$('#pimage').attr('src',data.product.image_one);
+				$('#pcode').text(data.product.product_code);
+				$('#pcat').text(data.product.category_name);
+				$('#psub').text(data.product.subcategory_name);
+				$('#pbrand').text(data.product.name);
+				$('#product_id').val(data.product.id);
+
+				var d = $('select[name="color"]').empty();
+				$.each(data.color,function(key,value){
+					$('select[name="color"]').append('<option value="'+value+'">'+value+'</option>');
+				});
+
+				var d = $('select[name="size"]').empty();
+				$.each(data.size,function(key,value){
+					$('select[name="size"]').append('<option value="'+value+'">'+value+'</option>');
+				});
+			}
+		})
+	}
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- <script type="text/javascript">
 	$(document).ready(function() {
