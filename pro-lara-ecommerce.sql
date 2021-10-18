@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2021 at 06:31 AM
+-- Generation Time: Oct 18, 2021 at 05:58 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.24
 
@@ -35,6 +35,19 @@ CREATE TABLE `admins` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coupon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `blog` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `report` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `return` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `setting` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` int(15) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,8 +56,9 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `name`, `phone`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(3, 'Admin', '123456789', 'admin@gmail.com', NULL, '$2y$10$GayOblYYdcE0dtLLHQW05eQe9whKbdcw0MI/5bkgAUann3S6RiaZi', NULL, NULL, '2021-09-09 04:00:52');
+INSERT INTO `admins` (`id`, `name`, `phone`, `email`, `email_verified_at`, `password`, `remember_token`, `category`, `coupon`, `product`, `blog`, `order`, `other`, `report`, `role`, `return`, `contact`, `comment`, `setting`, `type`, `created_at`, `updated_at`) VALUES
+(3, 'Admin', '123456789', 'admin@gmail.com', NULL, '$2y$10$GayOblYYdcE0dtLLHQW05eQe9whKbdcw0MI/5bkgAUann3S6RiaZi', NULL, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', 1, NULL, '2021-09-09 04:00:52'),
+(9, 'Rasel Rana', '01716530037', 'raselrana500@gmail.com', NULL, '$2y$10$qjSN1motoDtph6zrAI6v6ukegQ9lPr4hPnvuYX0z7EaME4nxTkAIG', NULL, NULL, NULL, NULL, '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2021-10-18 13:15:32', '2021-10-18 13:15:32');
 
 -- --------------------------------------------------------
 
@@ -843,7 +857,7 @@ ALTER TABLE `wishlists`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `brands`
