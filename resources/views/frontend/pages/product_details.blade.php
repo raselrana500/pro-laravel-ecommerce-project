@@ -47,7 +47,7 @@
 										<div class="form-group">
 
 										<label for="exampleFormControlSelect1">Color</label>
-										<select name="color" id="exampleFormControlSelect1" class="form-control">
+										<select name="color" id="exampleFormControlSelect1" class="form-control input-lg">
 											@foreach($product_color as $color)	
 												<option value="{{ $color }}">{{ $color }}</option>
 											@endforeach
@@ -94,6 +94,11 @@
 									<button type="submit" class="button cart_button">Add to Cart</button>
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
+								<br><br>
+								<h5>Share this post in - </h5>
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <div class="addthis_inline_share_toolbox"></div>
+            
 								
 							</form>
 						</div>
@@ -131,12 +136,23 @@
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">{!! $product->product_details !!}</div><br>
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"><a href="{{ $product->video_link}}" target="_blank"> {{ $product->video_link}}</a></div>
-  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">Review</div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+	<h5>Comment Here</h5>
+	<div class="fb-comments" data-href="{{ Request::url() }}" data-width="" data-numposts="5"></div>
+	</div>
+  </div>
 </div>
 
 				</div>				
 			</div>
 		</div>
 	</div>
+
+
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=129296551218728&autoLogAppEvents=1" nonce="kMN9KUt8"></script>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6171b3c7bce9ece3"></script>
+
+
 
 @endsection

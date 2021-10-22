@@ -1,9 +1,6 @@
 @extends('frontend.layouts.app')
 @section('content')
 
-@php
-    $order = DB::table('orders')->where('user_id',Auth::id())->orderBy('id','DESC')->limit(10)->get();
-@endphp
 <div class="contact_form">
     <div class="container">
         <div class="row">
@@ -12,7 +9,7 @@
                     <thead>
                         <tr>
                             <th>Payment Type</th>
-                            <th>Status Code</th>
+                            <th>Return Order</th>
                             <th>Amount</th>
                             <th>Data</th>
                             <th>Status Code</th>
@@ -21,10 +18,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($order as $row)
+                        @foreach ($data as $row)
                             <tr>
                                 <td>{{ $row->payment_type }}</td>
-                                <td>{{ $row->status_code}}</td>
+                                <td>
+                                    @if ($row->return_order == 0)
+                                    <span class="badge badge-warning">No Return Request</span>
+                                    @elseif($row->return_order == 1)
+                                        <span class="badge badge-info">Pending</span>
+                                    @elseif($row->return_order == 2)
+                                        <span class="badge badge-success">Success</span>
+                                    @elseif($row->return_order == 3)
+                                    <span class="badge badge-danger">Cancel Request by admin</span>
+                                    @endif
+                                </td>
                                 <td>{{ $row->total }} $ </td>
                                 <td>{{ $row->date}}</td>
                                 <td>{{ $row->status_code }}</td>
@@ -42,7 +49,16 @@
                                     @endif
                                   </td>
                                 <td>
-                                    <a href="{{ URL::to('user/profile/order/view/'.$row->id)  }}" class="btn btn-sm btn-info">View</a>
+                                    @if ($row->return_order == 0)
+                                    <a href="{{ url('request/return/'.$row->id) }}" class="btn btn-sm btn-danger" id="return">Return</a>
+                                    @elseif($row->return_order == 1)
+                                        <span class="badge badge-info">Pending</span>
+                                    @elseif($row->return_order == 2)
+                                        <span class="badge badge-success">Success</span>
+                                    @elseif($row->return_order == 3)
+                                    <span class="badge badge-danger">Cancel Request by admin</span>
+                                    @endif
+                                    
                                 </td>
 
                             </tr>
@@ -73,4 +89,26 @@
         </div>
     </div>
 </div>
+    
+<script>  
+    $(document).on("click", "#return", function(e){
+        e.preventDefault();
+        var link = $(this).attr("href");
+           swal({
+             title: "Are you Want to Return?",
+             text: "it will be need some working Day for processing!",
+             icon: "warning",
+             buttons: true,
+             dangerMode: true,
+           })
+           .then((willDelete) => {
+             if (willDelete) {
+                  window.location.href = link;
+             } else {
+               swal("OK");
+             }
+           });
+       });
+</script> 
 @endsection
+

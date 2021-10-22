@@ -183,3 +183,18 @@ Route::post('admin/store','Admin\User\UserRoleController@storeAdminInfo')->name(
 Route::post('admin/update','Admin\User\UserRoleController@updateAdminInfo')->name('update.admin.info');
 Route::get('admin/delete/admin/{id}','Admin\User\UserRoleController@delteAdmin');
 Route::get('admin/edit/admin/{id}','Admin\User\UserRoleController@editAdmin');
+
+//route for site setting
+Route::get('admin/site/setting','Admin\SiteSetting\SiteSettingController@siteSetting')->name('admin.site.setting');
+Route::post('admin/site/setting/update','Admin\SiteSetting\SiteSettingController@updateSiteSetting')->name('update.site.setting');
+
+//Return order route
+Route::get('received/order','PaymentController@viewReceivedItem')->name('received.order');
+Route::get('request/return/{id}','PaymentController@returnRequest');
+
+//admin return order routes
+Route::get('admin/return/request','Admin\Returns\ReturnController@returnRequest')->name('admin.return.request');
+Route::get('admin/all/return','Admin\Returns\ReturnController@allReturn')->name('admin.all.return');
+Route::get('admin/cancel/return/request','Admin\Returns\ReturnController@CancelReturn')->name('admin.cancel.return');
+Route::get('admin/approve/return/{id}','Admin\Returns\ReturnController@approveReturnRequest');
+Route::get('admin/cancel/return/{id}','Admin\Returns\ReturnController@cancelReturnRequest');

@@ -1,8 +1,10 @@
+@php
+    $data = DB::table('site_settings')->first();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>pro-laravel-ecommerce</title>
+    <title>{{ $data->company_name }}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="OneTech shop project">
@@ -42,12 +44,12 @@
                     <div class="row">
                         <div class="col d-flex flex-row">
                             <div class="top_bar_contact_item">
-                                <div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005 3570
+                                <div class="top_bar_icon"><img src="images/phone.png" alt=""></div>{{ $data->phone_one }}
                             </div>
 
                             <div class="top_bar_contact_item">
                                 <div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a
-                                    href="mailto:fastsales@gmail.com">fastsales@gmail.com</a>
+                                    href="mailto:fastsales@gmail.com">{{ $data->email }}</a>
                             </div>
                             <div class="top_bar_content ml-auto">
 
@@ -218,6 +220,9 @@
             @yield('content')
 
             <!-- Footer -->
+            @php
+                $data = DB::table('site_settings')->first();
+            @endphp
 
             <footer class="footer">
                 <div class="container">
@@ -226,21 +231,36 @@
                         <div class="col-lg-3 footer_col">
                             <div class="footer_column footer_contact">
                                 <div class="logo_container">
-                                    <div class="logo"><a href="#">OneTech</a></div>
+                                    <div class="logo"><a href="#"><h4>{{ $data->company_name }}</h4></a></div>
                                 </div>
-                                <div class="footer_title">Got Question? Call Us 24/7</div>
-                                <div class="footer_phone">+38 068 005 3570</div>
+                                <div class="footer_title">Got Question? Call US 24/7</div>
+                                <div class="footer_phone">{{ $data->phone_two }}</div>
                                 <div class="footer_contact_text">
-                                    <p>17 Princess Road, London</p>
-                                    <p>Grester London NW18JR, UK</p>
+                                    <p>{{ $data->company_address }}</p>
                                 </div>
                                 <div class="footer_social">
                                     <ul>
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-google"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+                                        @if ($data->facebook != NULL)
+                                            <li><a href="{{ $data->facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                        @else
+                                            
+                                        @endif
+                                        @if ($data->twitter != NULL)
+                                            <li><a href="{{ $data->twitter }}"target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                        @else
+                                            
+                                        @endif
+                                        @if ($data->youtube != NULL)
+                                            <li><a href="{{ $data->youtube }}"target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                        @else
+                                            
+                                        @endif
+                                        @if ($data->instagram != NULL)
+                                            <li><a href="{{ $data->instagram }}"target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                        @else
+                                            
+                                        @endif
+                                                                         
                                     </ul>
                                 </div>
                             </div>
@@ -394,6 +414,8 @@
             }
         @endif
     </script>
+
+
 </body>
 
 </html>

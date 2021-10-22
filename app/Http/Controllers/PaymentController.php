@@ -117,4 +117,18 @@ class PaymentController extends Controller
 
 
     }
+
+    public function viewReceivedItem(){
+        $data = DB::table('orders')->where('user_id',Auth::id())->where('status',3)->orderBy('id','DESC')->get();
+        return view('frontend.deliverd_order_item',compact('data'));
+    }
+
+    public function returnRequest($id){
+        $data = DB::table('orders')->where('id',$id)->update(['return_order' => 1]);
+        $notification=array(
+            'messege'=>'Return Request Done,Wait for Confirmation!',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
+    }
 }

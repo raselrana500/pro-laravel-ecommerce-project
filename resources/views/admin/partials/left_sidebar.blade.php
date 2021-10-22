@@ -166,9 +166,10 @@
         </div><!-- menu-item -->
     </a><!-- sl-menu-link -->
     <ul class="sl-menu-sub nav flex-column">
-        <li class="nav-item"><a href="{{ route('today.order') }}" class="nav-link">Return request</a>
+        <li class="nav-item"><a href="{{ route('admin.return.request') }}" class="nav-link">Return request</a>
         </li>
-        <li class="nav-item"><a href="{{ route('today.order') }}" class="nav-link">All Request</a></li>
+        <li class="nav-item"><a href="{{ route('admin.all.return') }}" class="nav-link">Approved Request</a></li>
+        <li class="nav-item"><a href="{{ route('admin.cancel.return') }}" class="nav-link">Cancel Request</a></li>
     </ul>
     @else
     @endif
@@ -220,7 +221,7 @@
         </div><!-- menu-item -->
     </a><!-- sl-menu-link -->
     <ul class="sl-menu-sub nav flex-column">
-        <li class="nav-item"><a href="{{ route('today.order') }}" class="nav-link">Setting</a></li>
+        <li class="nav-item"><a href="{{ route('admin.site.setting') }}" class="nav-link">Setting</a></li>
     </ul>
     @else
     @endif
