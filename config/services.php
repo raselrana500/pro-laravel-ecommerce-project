@@ -30,4 +30,17 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => '122029159087-s9g9gvo4h462qgsf2l5b95og43ukn3k5.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://localhost/pro-lara-ecommerce/callback/google',
+      ],
+
+    'facebook' => [
+        'client_id' => '2976377212676326',
+        'client_secret' => 'cbd5fd6111ffdf9804e4658b69258f01',
+        'redirect' => 'http://localhost/pro-lara-ecommerce/callback/facebook',
+      ],
+
+
 ];

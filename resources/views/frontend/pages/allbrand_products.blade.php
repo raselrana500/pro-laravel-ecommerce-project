@@ -6,16 +6,17 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/shop_responsive.css') }}">
     	<!-- Home -->
 
-	<div class="home">
-		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
-		<div class="home_overlay"></div>
-		<div class="home_content d-flex flex-column align-items-center justify-content-center">
-			<h2 class="home_title">
-				{{ $catName->category_name }}
-			</h2>
-		</div>
-	</div>
+    	<!-- Home -->
 
+        <div class="home">
+            <div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
+            <div class="home_overlay"></div>
+            <div class="home_content d-flex flex-column align-items-center justify-content-center">
+                <h2 class="home_title">
+                    {{ $brandName->name }}
+                </h2>
+            </div>
+        </div>
 	<!-- Shop -->
 
 	<div class="shop">

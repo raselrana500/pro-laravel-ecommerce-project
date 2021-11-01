@@ -121,6 +121,15 @@
                                     <span>Setting</span>
                                 </label>
                             </div><!-- col-4 -->
+
+                            <div class="col-lg-2">
+                                <label class="ckbox">
+                                    <input type="checkbox" name="stock" value="1">
+                                    <span>Stock</span>
+                                </label>
+                            </div><!-- col-4 -->
+
+
                         </div><!-- row -->
                         
                         <hr><br>

@@ -73,9 +73,21 @@ class ProductDetailsController extends Controller
     public function categoryProductView($id){
         $categoryProduct = DB::table('products')->where('category_id',$id)->paginate(10);
         $Product = DB::table('products')->where('category_id',$id)->first();
-        $category = DB::table('categories')->get();        
+        $category = DB::table('categories')->get();
+        $catName = DB::table('categories')->where('id',$id)->first();       
 
-        return view('frontend.pages.allcat_products',compact('categoryProduct','category','Product'));
+        return view('frontend.pages.allcat_products',compact('categoryProduct','category','Product','catName'));
     }
+
+    public function brandProductView($id){
+        $categoryProduct = DB::table('products')->where('brand_id',$id)->paginate(20);
+        $product = DB::table('products')->where('category_id',$id)->first();
+        $category = DB::table('categories')->get();
+        $brandName = DB::table('brands')->where('id',$id)->first();        
+
+        return view('frontend.pages.allbrand_products',compact('categoryProduct','category','product','brandName'));
+    }
+
+
     
 }

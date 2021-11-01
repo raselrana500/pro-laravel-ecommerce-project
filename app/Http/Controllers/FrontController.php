@@ -43,4 +43,12 @@ class FrontController extends Controller
                return Redirect()->back()->with($notification);
         }
     }
+
+    public function search(Request $request){
+        $data = $request->search;
+        $product = DB::table('products')
+                    ->where('product_name','LIKE',"%$data%")
+                    ->paginate(20);
+        return view('frontend.pages.search',compact('product','data'));
+    }
 }

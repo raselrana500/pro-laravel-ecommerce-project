@@ -19,6 +19,7 @@ class PostController extends Controller
         $allpost = DB::table('posts')
                     ->join('post_categories','posts.category_id','post_categories.id')
                     ->select('posts.*','post_categories.post_categoryName_en','post_categories.post_categoryName_bn')
+                    ->orderBy('posts.id','DESC')
                     ->get();
         return view('admin.blog_post.allpost',compact('allpost'));
     }
@@ -134,37 +135,5 @@ class PostController extends Controller
         return view('admin.blog_post.edit',compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Admin\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Admin\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\Admin\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
-    {
-        //
-    }
+    
 }

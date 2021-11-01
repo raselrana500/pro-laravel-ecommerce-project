@@ -44,6 +44,7 @@ class UserRoleController extends Controller
         $data['contact'] =$request->contact;
         $data['comment'] =$request->comment;
         $data['setting'] =$request->setting;
+        $data['stock'] =$request->stock;
         $data['type'] = 2 ;
 
         DB::table('admins')->insert($data);
@@ -71,6 +72,7 @@ class UserRoleController extends Controller
         $data['contact'] =$request->contact;
         $data['comment'] =$request->comment;
         $data['setting'] =$request->setting;
+        $data['stock'] =$request->stock;
 
         DB::table('admins')->where('id',$id)->update($data);
         $notification=array(
@@ -94,6 +96,17 @@ class UserRoleController extends Controller
     public function editAdmin($id){
         $data = DB::table('admins')->where('id',$id)->first();
         return view('admin.role.edit_role',compact('data'));
+    }
+
+    public function stock()
+    {
+        $product = DB::table('products')
+                    ->join('categories','products.category_id','categories.id')
+                    ->join('brands','products.brand_id','brands.id')
+                    ->select('products.*','categories.category_name','brands.name')
+                    ->orderBy('id','desc')
+                    ->get();
+        return view('admin.stock.stock',compact('product'));
     }
 
     

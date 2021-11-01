@@ -72,6 +72,15 @@ class OrderController extends Controller
 
 //order delivery done
     public function OrderDeliveryDone($id){
+
+        $data = DB::table('order_details')->where('order_id',$id)->get();
+
+        foreach ($data as  $row) {
+            DB::table('products')
+                    ->where('id',$row->product_id)
+                    ->update(['product_quantity' => DB::raw('product_quantity-'.$row->quantity)]);
+        }
+
         DB::table('orders')->where('id',$id)->update(['status'=>3,'delivery_date'=>date('d-m-y'),
         'delivery_month'=>date('F'),'delivery_year'=>date('Y')]);
         $notification = array(

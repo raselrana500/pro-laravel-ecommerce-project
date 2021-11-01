@@ -6,15 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/shop_responsive.css') }}">
     	<!-- Home -->
 
-	<div class="home">
-		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
-		<div class="home_overlay"></div>
-		<div class="home_content d-flex flex-column align-items-center justify-content-center">
-			<h2 class="home_title">
-				{{ $catName->category_name }}
-			</h2>
-		</div>
-	</div>
+
 
 	<!-- Shop -->
 
@@ -26,8 +18,11 @@
 					<!-- Shop Sidebar -->
 					<div class="shop_sidebar">
 						<div class="sidebar_section">
-							<div class="sidebar_title">Categories</div>
+							<div class="sidebar_title">Category</div>
 							<ul class="sidebar_categories">
+                                @php
+                                    $category = DB::table('categories')->get();
+                                @endphp
                                 @foreach ($category as $row)
 								    <li><a href="{{ url('category/'.$row->id)}}">{{ $row->category_name }}</a></li>                                    
                                 @endforeach
@@ -41,7 +36,9 @@
                                     $brandName = DB::table('brands')->get();
                                 @endphp
 								@foreach ($brandName as $row)
-								<li class="brand"><a href="{{ url('brand/'.$row->id)}}">{{ $row->name }}</a></li>                                    
+								<li class="brand">
+                                    <a href="{{ url('brand/'.$row->id)}}">{{ $row->name }}</a>
+                                </li>                                    
                                 @endforeach
 							</ul>
 						</div>
@@ -55,7 +52,7 @@
 
 					<div class="shop_content">
 						<div class="shop_bar clearfix">
-							<div class="shop_product_count"><span>{{ count($categoryProduct) }}</span> products found</div>
+							<div class="shop_product_count"><span>{{ count($product) }}</span> products found</div>
 							<div class="shop_sorting">
 								<span>Sort by:</span>
 								<ul>
@@ -74,7 +71,7 @@
 						<div class="product_grid row">
 							<div class="product_grid_border"></div>
 
-                            @foreach ($categoryProduct as $row)
+                            @foreach ($product as $row)
                                 <!-- Product Item -->
                                 <div class="product_item is_new">
                                     <div class="product_border"></div>
@@ -123,7 +120,7 @@
 
 						<div class="shop_page_nav d-flex flex-row">
 							
-							{{ $categoryProduct->links() }}
+							{{ $product->links() }}
 							
 						</div>
 

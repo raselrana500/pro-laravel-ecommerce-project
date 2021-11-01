@@ -1,7 +1,6 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-@include('frontend.layouts.menubar')
 
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/contact_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/contact_responsive.css') }}">
@@ -9,6 +8,7 @@
     $setting = DB::table('settings')->first();
     $charge = $setting->shipping_charge;
     $vat = $setting->vat;
+    $cart = Cart::content();
 @endphp
 
 <div class="contact_form">
@@ -97,67 +97,35 @@
             </div>
             <div class="col-lg-5" style="border:1px solid grey;padding:20px;border-radius:25px;">
                 <div class="contact_form_container">
-                    <div class="contact_form_title text-center">Shipping Address</div>
+                    <div class="contact_form_title text-center">Cash On Delivery</div>
                         
-                    <form action="{{ route('payment.process') }}" id="contact_form" method="post">
+                    <form action="{{ route('cashon.charge') }}" method="post" id="payment-form">
                         @csrf
-                        <div class="form-group">
-                            <label for="exampleInputEmail1"><b>Full Name</b></label>
-                            <input type="text" class="form-control" name="name" placeholder="Enter Your Full Name">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1"><b>Phone</b></label>
-                            <input type="text" class="form-control" name="phone" placeholder="Enter Your Phone Number">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1"><b>Email</b></label>
-                            <input type="email" class="form-control" 
-                                id="exampleInputEmail1" name="email" 
-                                aria-describedby="emailHelp" placeholder="Enter Your Email Address">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1"><b>Address</b></label>
-                            <input type="text" class="form-control"  name="address" placeholder="Enter Your Address">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1"><b>City</b></label>
-                            <input type="text" class="form-control"  name="city" placeholder="Enter Your City">
-                        </div>
-
-                        <div class="contact_form_title text-center">Payment By</div>
-                        <div class="form-group">
-                            <ul class="logos_list">
-                                <li>
-                                    <input type="radio" name="payment" value="stripe">
-                                    <img src="{{ asset('public/frontend/images/payment/mastercard.png') }}" style="width: 100px;" alt="">
-                                </li>
-                                <li>
-                                    <input type="radio" name="payment" value="paypal">
-                                    <img src="{{ asset('public/frontend/images/payment/paypal.png') }}" style="width: 100px;" alt="">
-                                </li>
-                                <li>
-                                    <input type="radio" name="payment" value="ideal">
-                                    <img src="{{ asset('public/frontend/images/payment/mollie.png') }}" style="width: 100px;" alt="">
-                                </li>
-                                <li>
-                                    <input type="radio" name="payment" value="sslcommerz">
-                                    <img src="{{ asset('public/frontend/images/payment/ssl.png') }}" style="width: 100px;" alt="">
-                                </li>
-                                <li>
-                                    <input type="radio" name="payment" value="cashOn">
-                                    <img src="{{ asset('public/frontend/images/payment/cod.png') }}" style="width: 100px;" alt="">
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="contact_form_button text-center">
-                            <button type="submit" class="btn btn-primary">Pay Now</button>
-                        </div>
-                    </form>
+                        <div class="form-row">
+                          <label for="card-element">
+                            Cash On Delivery
+                          </label>
+          
+                          <!-- Used to display form errors. -->
+                          <div id="card-errors" role="alert"></div>
+                        </div><br>
+          
+            <input type="hidden" name="shipping" value="{{ $charge }} ">
+            <input type="hidden" name="vat" value="{{ $vat }} ">
+            <input type="hidden" name="total" value="{{ Cart::Subtotal() + $charge + $vat }} ">
+          
+            <input type="hidden" name="ship_name" value="{{ $data['name'] }} ">
+            <input type="hidden" name="ship_phone" value="{{ $data['phone'] }} ">
+            <input type="hidden" name="ship_email" value="{{ $data['email'] }} ">
+            <input type="hidden" name="ship_address" value="{{ $data['address'] }} ">
+            <input type="hidden" name="ship_city" value="{{ $data['city'] }} ">
+            <input type="hidden" name="payment_type" value="{{ $data['payment'] }} ">
+          
+          
+          
+          
+                        <button class="btn btn-info">Order Now</button>
+                      </form>
                     
 
                 </div>
@@ -166,4 +134,7 @@
     </div>
     <div class="panel"></div>
 </div>
+
+
+
 @endsection

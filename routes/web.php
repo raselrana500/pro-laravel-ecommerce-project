@@ -1,6 +1,8 @@
 <?php
 
-
+//social login
+Route::get('/auth/redirect/{provider}', 'GoogleLoginController@redirect');
+Route::get('/callback/{provider}', 'GoogleLoginController@callback');
 
 Route::get('/','FrontController@homePage')->name('home.page');
 Route::get('/user/profile','HomeController@showUserProfile')->name('user.profile');
@@ -137,9 +139,11 @@ Route::get('blog/postdetails/{id}','BlogController@viewSinglePost');
 Route::get('payment/page','PaymentController@paymentPage')->name('payment.step');
 Route::post('payment/process','PaymentController@paymentProcess')->name('payment.process');
 Route::post('payment/stripe','PaymentController@stripeCharge')->name('stripe.charge');
+Route::post('payment/cashon','PaymentController@cashOnCharge')->name('cashon.charge');
 //product details route
 Route::get('subcategory/{id}','ProductDetailsController@productsView');
 Route::get('category/{id}','ProductDetailsController@categoryProductView');
+Route::get('brand/{id}','ProductDetailsController@brandProductView');
 
 //order route for admin pannel
 Route::get('admin/order/new','Admin\Order\OrderController@newOrder')->name('admin.neworder');
@@ -198,3 +202,19 @@ Route::get('admin/all/return','Admin\Returns\ReturnController@allReturn')->name(
 Route::get('admin/cancel/return/request','Admin\Returns\ReturnController@CancelReturn')->name('admin.cancel.return');
 Route::get('admin/approve/return/{id}','Admin\Returns\ReturnController@approveReturnRequest');
 Route::get('admin/cancel/return/{id}','Admin\Returns\ReturnController@cancelReturnRequest');
+
+//stock routes
+Route::get('admin/product/stock','Admin\User\UserRoleController@stock')->name('admin.product.stock');
+
+//contact page routes
+Route::get('contact/page','ContactController@index')->name('contact.page');
+Route::post('contact/send','ContactController@sendData')->name('contact.form');
+
+//admin message route
+Route::get('admin/all/message','Admin\Contact\ContactController@index')->name('all.message');
+Route::get('admin/message/view/{id}','Admin\Contact\ContactController@viewMessage');
+Route::get('admin/message/seen/{id}','Admin\Contact\ContactController@seenMessage');
+Route::get('admin/message/unseen/{id}','Admin\Contact\ContactController@unseenMessage');
+
+//search route
+Route::post('product/search','FrontController@search')->name('product.search');

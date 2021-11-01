@@ -11,6 +11,7 @@ class BlogController extends Controller
         $post = DB::table('posts')
                 ->join('post_categories','posts.category_id','post_categories.id')
                 ->select('posts.*','post_categories.post_categoryName_en','post_categories.post_categoryName_bn')
+                ->orderBy('posts.id','DESC')
                 ->get();
         return view('frontend.pages.blog',compact('post'));
     }
