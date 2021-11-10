@@ -32,8 +32,8 @@ class PaymentController extends Controller
             return view('frontend.pages.payment.stripe',compact('data'));
         }elseif($request->payment == 'paypal'){
             
-        }elseif($request->payment == 'ideal'){
-
+        }elseif($request->payment == 'sslcommerz'){
+            return view('exampleHosted',compact('data'));
         }elseif($request->payment == 'cashOn'){
             return view('frontend.pages.payment.cashOn',compact('data'));
         }

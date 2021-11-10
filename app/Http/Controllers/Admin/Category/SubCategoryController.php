@@ -21,6 +21,7 @@ class SubCategoryController extends Controller
         $subcat = DB::table('sub_categories')
                     ->join('categories','sub_categories.catId','categories.id')
                     ->select('sub_categories.*','categories.category_name')
+                    ->orderBy('id','desc')
                     ->get();
         return view('admin.subcategory.subcategory',compact('category','subcat'));
     }
@@ -28,7 +29,7 @@ class SubCategoryController extends Controller
     public function storeSubCategory(Request $request){
         $validateData = $request->validate([
             'catId' => 'required',
-            'subcategory_name' => 'required|unique:sub_categories|max:55',
+            'subcategory_name' => 'required|max:55',
         ]);
 
         $data = array();

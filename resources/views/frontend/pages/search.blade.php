@@ -77,18 +77,19 @@
                                     <div class="product_border"></div>
                                     <div class="product_image d-flex flex-column align-items-center justify-content-center">
                                         <a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}">
-                                        <img src="{{ asset($row->image_one) }}" style="width:120px;" alt=""></a>
+                                        <img src="{{ asset($row->image_one) }}" style="width:100px;" alt=""></a>
                                     </div>
                                     <div class="product_content">
                                         <div class="product_price">
                                             @if($row->discount_price == NULL)
-											<div class="product_price discount"><span>${{ $row->selling_price }}</span></div>
+											<div class="product_price discount">${{ $row->selling_price }}</div>
 											@else
-											<div class="product_price discount">${{ $row->discount_price }}<span>${{ $row->selling_price }}</span></div>
+											<div class="product_price discount">${{ $row->discount_price }}<span><del>${{ $row->selling_price }}</del></span></div>
 
 											@endif
                                         </div>
                                         <div class="product_name"><div><a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}" tabindex="0">{{ $row->product_name }}</a></div></div>
+										
                                     </div>
                                     <div class="product_fav"><i class="fas fa-heart"></i></div>
                                     <ul class="product_marks">

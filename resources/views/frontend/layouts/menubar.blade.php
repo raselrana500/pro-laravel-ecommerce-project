@@ -40,8 +40,8 @@ $category = DB::table('categories')->get();
 
 					<div class="main_nav_menu ml-auto">
 						<ul class="standard_dropdown main_nav_dropdown">
-							<li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
-							<li class="hassubs">
+							<li><a href="{{ route('home.page') }}">Home<i class="fas fa-chevron-down"></i></a></li>
+							{{-- <li class="hassubs">
 								<a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
 								<ul>
 									<li>
@@ -84,7 +84,7 @@ $category = DB::table('categories')->get();
 									<li><a href="cart.html">Cart<i class="fas fa-chevron-down"></i></a></li>
 									<li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
 								</ul>
-							</li>
+							</li> --}}
 							<li><a href="{{ route('blog.post') }}">Blog<i class="fas fa-chevron-down"></i></a></li>
 							<li><a href="{{ route('contact.page') }}">Contact<i class="fas fa-chevron-down"></i></a></li>
 						</ul>
@@ -143,7 +143,7 @@ $category = DB::table('categories')->get();
 						<li class="page_menu_item">
 							<a href="#">Home<i class="fa fa-angle-down"></i></a>
 						</li>
-						<li class="page_menu_item has-children">
+						{{-- <li class="page_menu_item has-children">
 							<a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
 							<ul class="page_menu_selection">
 								<li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
@@ -160,8 +160,8 @@ $category = DB::table('categories')->get();
 								<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
 								<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
 							</ul>
-						</li>
-						<li class="page_menu_item has-children">
+						</li> --}}
+						{{-- <li class="page_menu_item has-children">
 							<a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
 							<ul class="page_menu_selection">
 								<li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
@@ -169,8 +169,8 @@ $category = DB::table('categories')->get();
 								<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
 								<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
 							</ul>
-						</li>
-						<li class="page_menu_item has-children">
+						</li> --}}
+						{{-- <li class="page_menu_item has-children">
 							<a href="#">Trending Styles<i class="fa fa-angle-down"></i></a>
 							<ul class="page_menu_selection">
 								<li><a href="#">Trending Styles<i class="fa fa-angle-down"></i></a></li>
@@ -178,9 +178,9 @@ $category = DB::table('categories')->get();
 								<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
 								<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
 							</ul>
-						</li>
-						<li class="page_menu_item"><a href="">blog<i class="fa fa-angle-down"></i></a></li>
-						<li class="page_menu_item"><a href="">contact<i class="fa fa-angle-down"></i></a></li>
+						</li> --}}
+						{{-- <li class="page_menu_item"><a href="">blog<i class="fa fa-angle-down"></i></a></li>
+						<li class="page_menu_item"><a href="">contact<i class="fa fa-angle-down"></i></a></li> --}}
 					</ul>
 
 					<div class="menu_contact">

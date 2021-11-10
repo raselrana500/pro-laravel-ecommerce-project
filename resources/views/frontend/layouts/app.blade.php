@@ -1,8 +1,9 @@
 @php
-    $data = DB::table('site_settings')->first();
+$data = DB::table('site_settings')->first();
 @endphp
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>{{ $data->company_name }}</title>
     <meta charset="utf-8">
@@ -44,7 +45,8 @@
                     <div class="row">
                         <div class="col d-flex flex-row">
                             <div class="top_bar_contact_item">
-                                <div class="top_bar_icon"><img src="images/phone.png" alt=""></div>{{ $data->phone_one }}
+                                <div class="top_bar_icon"><img src="images/phone.png" alt=""></div>
+                                {{ $data->phone_one }}
                             </div>
 
                             <div class="top_bar_contact_item">
@@ -85,6 +87,8 @@
                                             @endif
 
                                         </li>
+
+
                                     </ul>
                                 </div>
                                 <div class="top_bar_user">
@@ -140,7 +144,8 @@
                             <div class="header_search">
                                 <div class="header_search_content">
                                     <div class="header_search_form_container">
-                                        <form action="{{ route('product.search') }}" class="header_search_form clearfix" method="post">
+                                        <form action="{{ route('product.search') }}"
+                                            class="header_search_form clearfix" method="post">
                                             @csrf
                                             <input type="search" required="required" class="header_search_input"
                                                 placeholder="Search for products..." name="search">
@@ -167,7 +172,8 @@
                                             <button type="submit" class="header_search_button trans_300"
                                                 value="Submit"><img
                                                     src="{{ asset('public/frontend/images/search.png') }}"
-                                                    alt=""></button>
+                                                    alt="">
+                                            </button>
                                         </form>
                                     </div>
                                 </div>
@@ -192,9 +198,9 @@
                                                     href="{{ route('user.wishlist') }}">Wishlist</a></div>
                                             <div class="wishlist_count">{{ count($wishlist) }}</div>
                                         </div>
-                                	@endguest
-									
-								</div>
+                                    @endguest
+
+                                </div>
                                 <!-- Cart -->
                                 <div class="cart">
                                     <div class="cart_container d-flex flex-row align-items-center justify-content-end">
@@ -205,7 +211,7 @@
                                         <div class="cart_content">
                                             <div class="cart_text"><a href="{{ route('show.cart') }}">Cart</a>
                                             </div>
-                                            <div class="cart_price">{{ Cart::subtotal() }}</div>
+                                            <div class="cart_price">${{ Cart::subtotal() }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -235,7 +241,9 @@
                         <div class="col-lg-3 footer_col">
                             <div class="footer_column footer_contact">
                                 <div class="logo_container">
-                                    <div class="logo"><a href="#"><h4>{{ $data->company_name }}</h4></a></div>
+                                    <div class="logo"><a href="#">
+                                            <h4>{{ $data->company_name }}</h4>
+                                        </a></div>
                                 </div>
                                 <div class="footer_title">Got Question? Call US 24/7</div>
                                 <div class="footer_phone">{{ $data->phone_two }}</div>
@@ -244,27 +252,31 @@
                                 </div>
                                 <div class="footer_social">
                                     <ul>
-                                        @if ($data->facebook != NULL)
-                                            <li><a href="{{ $data->facebook }}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                        @if ($data->facebook != null)
+                                            <li><a href="{{ $data->facebook }}" target="_blank"><i
+                                                        class="fab fa-facebook-f"></i></a></li>
                                         @else
-                                            
+
                                         @endif
-                                        @if ($data->twitter != NULL)
-                                            <li><a href="{{ $data->twitter }}"target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                        @if ($data->twitter != null)
+                                            <li><a href="{{ $data->twitter }}" target="_blank"><i
+                                                        class="fab fa-twitter"></i></a></li>
                                         @else
-                                            
+
                                         @endif
-                                        @if ($data->youtube != NULL)
-                                            <li><a href="{{ $data->youtube }}"target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                        @if ($data->youtube != null)
+                                            <li><a href="{{ $data->youtube }}" target="_blank"><i
+                                                        class="fab fa-youtube"></i></a></li>
                                         @else
-                                            
+
                                         @endif
-                                        @if ($data->instagram != NULL)
-                                            <li><a href="{{ $data->instagram }}"target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                        @if ($data->instagram != null)
+                                            <li><a href="{{ $data->instagram }}" target="_blank"><i
+                                                        class="fab fa-instagram"></i></a></li>
                                         @else
-                                            
+
                                         @endif
-                                                                         
+
                                     </ul>
                                 </div>
                             </div>

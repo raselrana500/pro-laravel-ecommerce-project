@@ -72,7 +72,7 @@ class ProductController extends Controller
     {
         $data = array();
         $data['product_name'] = $request->product_name;
-        $data['product_code'] = $request->product_code;
+        $data['product_code'] = mt_rand(100000, 999999);
         $data['product_quantity'] = $request->product_quantity;
         $data['category_id'] = $request->catId;
         $data['subcategory_id'] = $request->subcategory_id;
@@ -147,7 +147,7 @@ class ProductController extends Controller
     {
         $data = array();
         $data['product_name'] = $request->product_name;
-        $data['product_code'] = $request->product_code;
+        // $data['product_code'] = $request->product_code;
         $data['product_quantity'] = $request->product_quantity;
         $data['category_id'] = $request->catId;
         $data['subcategory_id'] = $request->subcategory_id;
@@ -286,4 +286,6 @@ class ProductController extends Controller
              );
            return Redirect()->route('all.products')->with($notification);
     }
+
+    
 }

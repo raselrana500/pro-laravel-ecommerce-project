@@ -25,7 +25,7 @@ $slider = DB::table('products')
 					<div class="banner_product_name">{{ $slider->name }}</div>
 					<div class="button banner_button"><a href="#">Shop Now</a></div>
 				</div>
-				<div class="banner_product_image"><img src="{{ asset($slider->image_one) }}" alt="" style="width:300px; float:right;"></div>
+				<div class="banner_product_image"><img src="{{ asset($slider->image_one) }}" alt="" style="width:200px; float:right;"></div>
 				
 				
 			</div>

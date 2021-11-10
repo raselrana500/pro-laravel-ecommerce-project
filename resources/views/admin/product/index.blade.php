@@ -44,7 +44,7 @@
                   <tr>
                   <td>{{ $key+1 }}</td>
                   <td>{{ $row->product_code }}</td>
-                  <td>{{ $row->product_name }}</td>
+                  <td>{{  Str::limit($row->product_name,20) }}</td>
                   <td><img src="{{ URL::to($row->image_one) }}" style="width:50px;" alt="">
                   <a href="{{ route('update.product.imageshow',$row->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
                   </td>
